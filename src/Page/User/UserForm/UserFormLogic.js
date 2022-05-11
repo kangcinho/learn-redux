@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {onPost, onPut, onClearForm} from "../../../Features/Users/UserReducer"
 
 const UserFormLogic = () => {
-
+  
   const dispatch = useDispatch();
   const userForm = useSelector((state) => state.users.userForm);
   const [name, sName] = useState(userForm.name);
   const [username, sUsername] = useState(userForm.username);
-
   useEffect(() => {
+    console.log("useEffect User Form")
     setName(userForm.name);
     setUsername(userForm.username);
   },[userForm.name, userForm.username])
@@ -31,10 +31,16 @@ const UserFormLogic = () => {
 
     if(userForm.id === 0){
       dispatch(onPost(user));
+      pOnClearForm();
     }else{
       dispatch(onPut(user));
+      dispatch(onClearForm());
     }
-    dispatch(onClearForm());
+  }
+
+  const pOnClearForm = () => {
+    setName("");
+    setUsername("");
   }
 
   return {

@@ -42,8 +42,12 @@ export const users = createSlice({
       console.log("onIndex");
       state.users = usersData;
     },
-    onClearForm: (state) => {
-      state.userForm = userForm;
+    onClearForm: (state, action) => {
+      state.userForm = {
+        id:0,
+        name:"",
+        username:""
+      };
     }
   }
 })
